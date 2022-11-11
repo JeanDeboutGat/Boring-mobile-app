@@ -75,7 +75,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           Text("Participants"),
                                           Image(
                                               image: AssetImage(
-                                                  "assets/participants.png"))
+                                                  "assets/participants-group.png"))
                                         ],
                                       ),
                                       Row(
