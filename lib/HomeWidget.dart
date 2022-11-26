@@ -68,7 +68,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: const [
@@ -92,11 +93,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   "assets/accessibility-highlighted.png")),
                                         ],
                                       ),
-
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: const [
@@ -137,7 +138,19 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     FloatingActionButton(
                       backgroundColor: const Color(COLORS.secondary),
-                      onPressed: () {},
+                      onPressed: () {
+                        const snackBar = SnackBar(
+                          content: Text('Your activity is added in todo-list', style: TextStyle(color: Colors.black)),
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                          backgroundColor: Color(COLORS.secondary),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              side: BorderSide(
+                                  width: 3, color: Color(COLORS.primary))),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
                       child:
                           const Icon(Icons.add, color: Color(COLORS.primary)),
                     )
