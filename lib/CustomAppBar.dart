@@ -34,20 +34,22 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ],
         ),
         actions: [
-          widget.filter
+          widget.todoList
               ? IconButton(
                   icon: const Icon(Icons.filter_alt_outlined),
                   tooltip: "Open activities filter",
                   onPressed: () {
+                    Navigator.pushNamed(context, '/filter');
                     print("todo list pressed");
                   },
                 )
               : Container(),
-          widget.todoList
+          widget.filter
               ? IconButton(
                   icon: const Icon(Icons.checklist_rtl_outlined),
                   tooltip: "Open activities filter",
                   onPressed: () {
+                    Navigator.pushNamed(context, '/todolist');
                     print("filter pressed");
                   },
                 )

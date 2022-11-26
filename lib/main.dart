@@ -7,10 +7,9 @@ import 'LoadingAppWidget.dart';
 
 void main() {
   runApp(MaterialApp(
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
-        '/': (context) => FilterWidget(),
-        '/home': (context) => const HomeWidget(),
+        '/': (context) => const HomeWidget(),
         '/todolist': (context) => TodoListWidget(),
         '/filter': (context) => FilterWidget(),
         '/loading': ((context) => const LoadingAppWidget())

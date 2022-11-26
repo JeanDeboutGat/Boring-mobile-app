@@ -26,7 +26,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(true, false, preferredSize: Size(56, 56)),
+      appBar: const CustomAppBar(false, true, preferredSize: Size(56, 56)),
       backgroundColor: const Color(COLORS.accent),
       body: Column(
         children: [
