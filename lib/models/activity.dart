@@ -1,10 +1,12 @@
+enum Participants { one, group }
+
+enum TypeActivity { education, cooking, recreational, charity, relaxation, music, busywork }
+
 class Activity {
-  String? activity;
-  String? accessibility;
-  String? type;
-  String? participants;
-  String? price;
+  TypeActivity type;
+  Participants participants;
+  int cost;
+  int accessibility;
 
-
-
+  Activity(this.type, this.participants, this.cost, this.accessibility);
 }

@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:me_bored/models/activity.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import 'CustomAppBar.dart';
-import 'constants.dart';
-
-class ActivityType {
-  String type;
-  String image;
-
-  ActivityType(this.type, this.image);
-
-  @override
-  bool operator ==(Object other) =>
-      other is ActivityType && (other.type == type && other.image == image);
-
-  @override
-  int get hashCode => type.hashCode;
-}
+import '../models/filter.dart';
+import 'CustomAppBarWidget.dart';
+import '../constants.dart';
 
 class FilterWidget extends StatefulWidget {
   FilterWidget({super.key});
 
-  final List<ActivityType> typesList = <ActivityType>[
-    ActivityType("education", "assets/cost-highlighted.png"),
-    ActivityType("recreational", "assets/cost-highlighted.png"),
-    ActivityType("charity", "assets/cost-highlighted.png"),
-    ActivityType("relaxation", "assets/cost-highlighted.png"),
-    ActivityType("music", "assets/cost-highlighted.png"),
-    ActivityType("busywork", "assets/cost-highlighted.png"),
+  final List<FilterItem> typesList = <FilterItem>[
+    FilterItem(TypeActivity.cooking, "assets/cooking.png"),
+    FilterItem(TypeActivity.education, "assets/cost-highlighted.png"),
+    FilterItem(TypeActivity.recreational, "assets/cost-highlighted.png"),
+    FilterItem(TypeActivity.relaxation, "assets/cost-highlighted.png"),
+    FilterItem(TypeActivity.music, "assets/cost-highlighted.png"),
+    FilterItem(TypeActivity.charity, "assets/cost-highlighted.png"),
   ];
 
   @override
@@ -39,7 +27,7 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   double _currentPriceSliderValue = 20;
   double _currentAccessibilitySliderValue = 20;
-  late ActivityType selectedTypeValue;
+  late FilterItem selectedTypeValue;
 
   @override
   void initState() {
@@ -58,11 +46,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 45),
-              child: Text("Filter activities",
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color(COLORS.primary))),
+              child: Text("Filter activities", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(COLORS.primary))),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,8 +90,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         },
                       ),
                     ),
-                    const Image(
-                        image: AssetImage("assets/cost-highlighted.png")),
+                    const Image(image: AssetImage("assets/cost-highlighted.png")),
                   ],
                 )
               ],
@@ -125,8 +108,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         divisions: 100,
                         activeColor: const Color(COLORS.primary),
                         inactiveColor: const Color(COLORS.secondary),
-                        label:
-                            _currentAccessibilitySliderValue.round().toString(),
+                        label: _currentAccessibilitySliderValue.round().toString(),
                         onChanged: (double value) {
                           setState(() {
                             _currentAccessibilitySliderValue = value;
@@ -134,9 +116,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         },
                       ),
                     ),
-                    const Image(
-                        image:
-                            AssetImage("assets/accessibility-highlighted.png")),
+                    const Image(image: AssetImage("assets/accessibility-highlighted.png")),
                   ],
                 ),
               ],
@@ -147,18 +127,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                 const Text("Chosen Type"),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
                   child: ButtonTheme(
                     alignedDropdown: true,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     focusColor: const Color(COLORS.secondary),
-                    child: DropdownButton<ActivityType>(
+                    child: DropdownButton<FilterItem>(
                       isExpanded: true,
                       value: selectedTypeValue,
                       icon: const Icon(Icons.arrow_drop_down_outlined),
@@ -171,16 +148,14 @@ class _FilterWidgetState extends State<FilterWidget> {
                           selectedTypeValue = newValue!;
                         });
                       },
-                      items: widget.typesList
-                          .map<DropdownMenuItem<ActivityType>>(
-                              (ActivityType value) {
-                        return DropdownMenuItem<ActivityType>(
+                      items: widget.typesList.map<DropdownMenuItem<FilterItem>>((FilterItem value) {
+                        return DropdownMenuItem<FilterItem>(
                           value: value,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(value.type),
-                              const Image(image: AssetImage("assets/cooking.png")),
+                              Text(value.type.name),
+                              Image(image: AssetImage(value.image)),
                             ],
                           ),
                         );

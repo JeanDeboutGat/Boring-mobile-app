@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:me_bored/TodoListWidget.dart';
-import 'package:me_bored/filterWidget.dart';
+import 'package:me_bored/views/HomeWidget.dart';
+import 'package:me_bored/views/LoadingAppWidget.dart';
+import 'package:me_bored/views/TodoListWidget.dart';
+import 'package:me_bored/views/filterWidget.dart';
 
-import 'HomeWidget.dart';
-import 'LoadingAppWidget.dart';
 
 void main() {
   runApp(MaterialApp(

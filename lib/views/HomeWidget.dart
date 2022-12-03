@@ -1,24 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:me_bored/constants.dart';
 
-import 'CustomAppBar.dart';
-import 'SwipableCategory.dart';
-
-enum Participants { one, group }
-
-enum Type { education, cooking }
+import 'CustomAppBarWidget.dart';
+import 'SwipableCategoryWidget.dart';
+import '../models/activity.dart';
 
 final ACCESSIBILITY_MAX = 3;
 final COST_MAX = 3;
-
-class Activity {
-  Type type;
-  Participants participants;
-  int cost;
-  int accessibility;
-
-  Activity(this.type, this.participants, this.cost, this.accessibility);
-}
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
@@ -30,7 +18,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  Activity activity = Activity(Type.cooking, Participants.group, 1, 2);
+  Activity activity = Activity(TypeActivity.cooking, Participants.group, 1, 2);
 
   @override
   Widget build(BuildContext context) {
