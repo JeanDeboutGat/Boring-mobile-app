@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:me_bored/constants.dart';
+import 'package:me_bored/services/todolist.service.dart';
 
+import '../models/todo.model.dart';
+import '../services/service.locator.dart';
 import 'CustomAppBarWidget.dart';
 import 'SwipableCategoryWidget.dart';
-import '../models/activity.dart';
+import '../models/activity.model.dart';
 
 final ACCESSIBILITY_MAX = 3;
 final COST_MAX = 3;
@@ -19,6 +22,7 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   Activity activity = Activity(TypeActivity.cooking, Participants.group, 1, 2);
+  TodoListService todoListService =  getIt<TodoListService>();
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +132,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     FloatingActionButton(
                       backgroundColor: const Color(COLORS.secondary),
                       onPressed: () {
+                        todoListService.add(Todo(activity.type.name, "assets/${activity.type.name}.png", false));
                         const snackBar = SnackBar(
                           content: Text('Your activity is added in todo-list', style: TextStyle(color: Colors.black)),
                           behavior: SnackBarBehavior.floating,

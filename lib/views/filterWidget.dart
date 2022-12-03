@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:me_bored/models/activity.dart';
+import 'package:me_bored/models/activity.model.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import '../models/filter.dart';
+import '../models/filter.model.dart';
 import 'CustomAppBarWidget.dart';
 import '../constants.dart';
 

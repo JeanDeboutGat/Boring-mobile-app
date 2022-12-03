@@ -1,4 +1,4 @@
-import 'activity.dart';
+import 'activity.model.dart';
 
 class FilterItem {
   TypeActivity type;
