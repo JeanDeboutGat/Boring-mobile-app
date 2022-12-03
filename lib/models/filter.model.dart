@@ -1,14 +1,23 @@
 import 'activity.model.dart';
 
-class FilterItem {
-  TypeActivity type;
+class Filter {
+  TypeActivity type = TypeActivity.any; // TODO find a better way to use union type in dart
+  double priceMin = 0;
+  double priceMax = 1;
+  Participants participants = Participants.group;
+  double accessibilityMin = 0;
+  double accessibilityMax = 1;
+}
+
+class FilterType {
+  TypeActivity name;
   String image;
 
-  FilterItem(this.type, this.image);
+  FilterType(this.name, this.image);
 
   @override
-  bool operator ==(Object other) => other is FilterItem && (other.type == type && other.image == image);
+  bool operator ==(Object other) => other is FilterType && (other.name == name && other.image == image);
 
   @override
-  int get hashCode => type.hashCode;
+  int get hashCode => name.hashCode;
 }

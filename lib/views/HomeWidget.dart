@@ -21,8 +21,8 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  Activity activity = Activity(TypeActivity.cooking, Participants.group, 1, 2);
-  TodoListService todoListService =  getIt<TodoListService>();
+  Activity activity = Activity("Make bread from scratch", TypeActivity.cooking, Participants.group, 1, 2);
+  TodoListService todoListService = getIt<TodoListService>();
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +66,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                           padding: const EdgeInsets.all(20),
                           child: Column(
                             children: [
-                              const Image(
-                                image: AssetImage("assets/undraw_cooking.png"),
+                              Image(
+                                image: AssetImage("assets/illustrations/${activity.type.name}.png"),
                               ),
                               const Text("Make bread from scratch"),
                               const SizedBox(width: 10),
@@ -109,9 +109,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         ],
                                       ),
                                       Row(
-                                        children: [
-                                          const Text("Type"),
-                                          Image(image: AssetImage("assets/${activity.type.name}.png")),
+                                        children: const [
+                                          Text("Type"),
+                                          Image(image: AssetImage("assets/cost-unhighlighted.png")),//TODO not accessing cooking png
                                         ],
                                       ),
                                     ],
