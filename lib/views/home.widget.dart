@@ -4,8 +4,8 @@ import 'package:me_bored/services/todolist.service.dart';
 
 import '../models/todo.model.dart';
 import '../services/service.locator.dart';
-import 'CustomAppBarWidget.dart';
-import 'SwipableCategoryWidget.dart';
+import 'custom-app-bar.widget.dart';
+import 'swipable-category.widget.dart';
 import '../models/activity.model.dart';
 
 final ACCESSIBILITY_MAX = 3;

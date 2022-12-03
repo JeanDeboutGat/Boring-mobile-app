@@ -4,7 +4,7 @@ import 'package:me_bored/constants.dart';
 import '../models/todo.model.dart';
 import '../services/service.locator.dart';
 import '../services/todolist.service.dart';
-import 'CustomAppBarWidget.dart';
+import 'custom-app-bar.widget.dart';
 
 class TodoListWidget extends StatefulWidget {
   TodoListWidget({super.key});

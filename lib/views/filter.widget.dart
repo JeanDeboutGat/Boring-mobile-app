@@ -5,7 +5,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 import '../models/filter.model.dart';
 import '../services/service.locator.dart';
-import 'CustomAppBarWidget.dart';
+import 'custom-app-bar.widget.dart';
 import '../constants.dart';
 
 class FilterWidget extends StatefulWidget {
