@@ -4,6 +4,22 @@ import 'package:me_bored/constants.dart';
 import 'CustomAppBar.dart';
 import 'SwipableCategory.dart';
 
+enum Participants { one, group }
+
+enum Type { education, cooking }
+
+final ACCESSIBILITY_MAX = 3;
+final COST_MAX = 3;
+
+class Activity {
+  Type type;
+  Participants participants;
+  int cost;
+  int accessibility;
+
+  Activity(this.type, this.participants, this.cost, this.accessibility);
+}
+
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
 
@@ -14,6 +30,8 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  Activity activity = Activity(Type.cooking, Participants.group, 1, 2);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +65,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                      child: Text("Activities"),
+                      child: Text("Swipe for more Activities"),
                     ),
                     Card(
                         shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            side: BorderSide(
-                                width: 3, color: Color(COLORS.primary))),
+                            borderRadius: BorderRadius.all(Radius.circular(10)), side: BorderSide(width: 3, color: Color(COLORS.primary))),
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           child: Column(
@@ -64,61 +80,46 @@ class _HomeWidgetState extends State<HomeWidget> {
                               const Text("Make bread from scratch"),
                               const SizedBox(width: 10),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        children: const [
-                                          Text("Participants"),
+                                        children: [
+                                          const Text("Participants"),
                                           Image(
-                                              image: AssetImage(
-                                                  "assets/participants-group.png"))
+                                              image: AssetImage(activity.participants == Participants.group
+                                                  ? "assets/participants-group.png"
+                                                  : "assets/participants-one.png"))
                                         ],
                                       ),
                                       Row(
-                                        children: const [
-                                          Text("Accessibility"),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/accessibility-highlighted.png")),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/accessibility-highlighted.png")),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/accessibility-highlighted.png")),
+                                        children: [
+                                          const Text("Accessibility"),
+                                          for (int i = 0; i < activity.accessibility; i++)
+                                            const Image(image: AssetImage("assets/accessibility-highlighted.png")),
+                                          for (int i = 0; i < ACCESSIBILITY_MAX - activity.accessibility; i++)
+                                            const Image(image: AssetImage("assets/accessibility-unhighlighted.png")),
                                         ],
                                       ),
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        children: const [
-                                          Text("Cost "),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/cost-highlighted.png")),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/cost-highlighted.png")),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/cost-highlighted.png")),
+                                        children: [
+                                          const Text("Cost "),
+                                          for (int i = 0; i < activity.cost; i++) const Image(image: AssetImage("assets/cost-highlighted.png")),
+                                          for (int i = 0; i < ACCESSIBILITY_MAX - activity.cost; i++)
+                                            const Image(image: AssetImage("assets/cost-unhighlighted.png")),
                                         ],
                                       ),
                                       Row(
-                                        children: const [
-                                          Text("Type"),
-                                          Image(
-                                              image: AssetImage(
-                                                  "assets/cook.png")),
+                                        children: [
+                                          const Text("Type"),
+                                          Image(image: AssetImage("assets/${activity.type.name}.png")),
                                         ],
                                       ),
                                     ],
@@ -145,14 +146,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                           margin: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                           backgroundColor: Color(COLORS.secondary),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              side: BorderSide(
-                                  width: 3, color: Color(COLORS.primary))),
+                              borderRadius: BorderRadius.all(Radius.circular(10)), side: BorderSide(width: 3, color: Color(COLORS.primary))),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
-                      child:
-                          const Icon(Icons.add, color: Color(COLORS.primary)),
+                      child: const Icon(Icons.add, color: Color(COLORS.primary)),
                     )
                   ],
                 ))
@@ -161,4 +159,6 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
     );
   }
+
+  displayAccessibility(int accessibilty) {}
 }

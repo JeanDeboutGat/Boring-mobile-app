@@ -15,7 +15,7 @@ class TodoListWidget extends StatefulWidget {
   TodoListWidget({super.key});
 
   final List<Todo> todos = List<Todo>.generate(
-      50, (i) => Todo("activity ${i}", "assets/cook.png", false));
+      50, (i) => Todo("activity ${i}", "assets/cooking.png", false));
 
   @override
   State<StatefulWidget> createState() {

@@ -180,7 +180,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(value.type),
-                              const Image(image: AssetImage("assets/cook.png")),
+                              const Image(image: AssetImage("assets/cooking.png")),
                             ],
                           ),
                         );
