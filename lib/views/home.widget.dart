@@ -12,7 +12,9 @@ final ACCESSIBILITY_MAX = 3;
 final COST_MAX = 3;
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({super.key});
+  const HomeWidget
+
+  ({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -34,6 +36,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Swipeable categories
             Expanded(
                 flex: 1,
                 child: Row(
@@ -50,6 +53,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                     SwipableCategory(),
                   ],
                 )),
+
+            // Swipeable activity card
             Expanded(
                 flex: 4,
                 child: Column(
@@ -109,9 +114,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         ],
                                       ),
                                       Row(
-                                        children: const [
-                                          Text("Type"),
-                                          Image(image: AssetImage("assets/cost-unhighlighted.png")),//TODO not accessing cooking png
+                                        children: [
+                                           const Text("Type"),
+                                          Image(image: AssetImage("assets/icon-${activity.type.name}.png")), //TODO not accessing cooking png properly
                                         ],
                                       ),
                                     ],
@@ -123,6 +128,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                         )),
                   ],
                 )),
+
+            // Todolist adding activity button
             Expanded(
                 flex: 1,
                 child: Row(
@@ -152,6 +159,4 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
     );
   }
-
-  displayAccessibility(int accessibilty) {}
 }

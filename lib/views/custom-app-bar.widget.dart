@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar(this.filter, this.todoList,
-      {super.key, required this.preferredSize});
+  const CustomAppBar(this.filter, this.todoList, {super.key, required this.preferredSize});
 
   final bool filter;
   final bool todoList;
