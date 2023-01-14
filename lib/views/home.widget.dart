@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:me_bored/constants.dart';
 import 'package:me_bored/services/todolist.service.dart';
 import 'package:me_bored/services/boring-api.service.dart';
+import 'package:swipe/swipe.dart';
 
 import '../models/todo.model.dart';
 import '../services/service.locator.dart';
@@ -87,56 +88,70 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                                 Text(activity.title ?? "no title"),
                                 const SizedBox(width: 10),
-                                Flexible(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Text("Participants"),
-                                              Image(
-                                                  image: AssetImage(activity.participants == Participants.group
-                                                      ? "assets/participants-group.png"
-                                                      : "assets/participants-one.png"))
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Text("Accessibility"),
-                                              for (int i = 0; i <Activity.proportionalizeForDisplay(activity.accessibility); i++)
-                                                const Image(image: AssetImage("assets/accessibility-highlighted.png")),
-                                              for (int i = 0; i < ACCESSIBILITY_MAX - Activity.proportionalizeForDisplay(activity.accessibility); i++)
-                                                const Image(image: AssetImage("assets/accessibility-unhighlighted.png")),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Text("Cost "),
-                                              for (int i = 0; i < Activity.proportionalizeForDisplay(activity.cost); i++) const Image(image: AssetImage("assets/cost-highlighted.png")),
-                                              for (int i = 0; i < COST_MAX - Activity.proportionalizeForDisplay(activity.cost); i++)
-                                                const Image(image: AssetImage("assets/cost-unhighlighted.png")),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Text("Type"),
-                                              Image(image: AssetImage("assets/icon-${activity.type.name}.png")),
-                                              //TODO not accessing cooking png properly
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                Swipe(
+                                  child: Flexible(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text("Participants"),
+                                                Image(
+                                                    image: AssetImage(activity.participants == Participants.group
+                                                        ? "assets/participants-group.png"
+                                                        : "assets/participants-one.png"))
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("Accessibility"),
+                                                for (int i = 0; i <Activity.proportionalizeForDisplay(activity.accessibility); i++)
+                                                  const Image(image: AssetImage("assets/accessibility-highlighted.png")),
+                                                for (int i = 0; i < ACCESSIBILITY_MAX - Activity.proportionalizeForDisplay(activity.accessibility); i++)
+                                                  const Image(image: AssetImage("assets/accessibility-unhighlighted.png")),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text("Cost "),
+                                                for (int i = 0; i < Activity.proportionalizeForDisplay(activity.cost); i++) const Image(image: AssetImage("assets/cost-highlighted.png")),
+                                                for (int i = 0; i < COST_MAX - Activity.proportionalizeForDisplay(activity.cost); i++)
+                                                  const Image(image: AssetImage("assets/cost-unhighlighted.png")),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("Type"),
+                                                Image(image: AssetImage("assets/icon-${activity.type.name}.png")),
+                                                //TODO not accessing cooking png properly
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ), // your child widget
+                                  onSwipeUp: () {
+                                    // do something when swiping up
+                                  },
+                                  onSwipeDown: () {
+                                    // do something when swiping down
+                                  },
+                                  onSwipeLeft: () {
+                                    BoringApi().getRandomActivity().then((value) => setState(() { activity = value; }));
+                                  },
+                                  onSwipeRight: () {
+                                    BoringApi().getRandomActivity().then((value) => setState(() { activity = value; }));
+                                  },
+                                )
                               ],
                             ),
                           )),
