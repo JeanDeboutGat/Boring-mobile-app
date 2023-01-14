@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:me_bored/services/service.locator.dart';
 import 'package:me_bored/views/home.widget.dart';
@@ -7,6 +9,7 @@ import 'package:me_bored/views/filter.widget.dart';
 
 
 void main() {
+  DartPluginRegistrant.ensureInitialized();
   setupServiceLocator();
   runApp(MaterialApp(
       initialRoute: '/',
