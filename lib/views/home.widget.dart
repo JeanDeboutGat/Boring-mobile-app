@@ -210,7 +210,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       backgroundColor: const Color(COLORS.secondary),
                       onPressed: () {
                         todoListService.add(Todo(activity.type.name,
-                            "assets/${activity.type.name}.png", false));
+                            "assets/icon-${activity.type.name}.png", false));
                         const snackBar = SnackBar(
                           content: Text('Your activity is added in todo-list',
                               style: TextStyle(color: Colors.black)),

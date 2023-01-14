@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:me_bored/views/filter.widget.dart';
 import 'cubits/category_cubit.dart';
 
 void main() {
+  DartPluginRegistrant.ensureInitialized();
   setupServiceLocator();
   Bloc.observer = BoringObserver();
   runApp(BlocProvider(
