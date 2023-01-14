@@ -6,6 +6,8 @@ import '../services/service.locator.dart';
 import '../services/todolist.service.dart';
 import 'custom-app-bar.widget.dart';
 
+import 'package:vibration/vibration.dart';
+
 class TodoListWidget extends StatefulWidget {
   TodoListWidget({super.key});
 
@@ -19,6 +21,12 @@ class TodoListWidget extends StatefulWidget {
 
 class _TodoListWidgetState extends State<TodoListWidget> {
   late final List<Todo> todos = widget.todoListService.getList();
+  late var vibration;
+
+  @override
+  void initState() {
+    Vibration.hasVibrator().then((value) => vibration = Vibration);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +35,15 @@ class _TodoListWidgetState extends State<TodoListWidget> {
       backgroundColor: const Color(COLORS.accent),
       body: Column(
         children: [
-
-          const Center(child: Padding(
+          const Center(
+              child: Padding(
             padding: EdgeInsets.symmetric(vertical: 50),
-            child: Text("My todo activities", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(COLORS.primary))),
+            child: Text("My todo activities",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color(COLORS.primary))),
           )),
-
           Expanded(
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -44,16 +55,23 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                             title: Text(todos.first.title),
                           ),
                           itemBuilder: (context, i) => Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
                                 child: CheckboxListTile(
                                   title: Text(todos[i].title),
                                   value: todos[i].state,
-                                  onChanged: (bool? value) => setState(() {
+                                  onChanged: (bool? value) async =>
+                                      setState(() {
                                     todos[i].state = value! ? value : false;
+                                    if (vibration != null) {
+                                      vibration.vibrate();
+                                    }
                                   }),
                                   tileColor: Colors.white,
                                   secondary: Image.asset(todos[i].icon),
-                                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
                                   checkboxShape: const CircleBorder(),
                                   checkColor: const Color(COLORS.checkColor),
                                   activeColor: const Color(COLORS.accent),
