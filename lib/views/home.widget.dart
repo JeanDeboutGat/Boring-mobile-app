@@ -4,6 +4,7 @@ import 'package:me_bored/constants.dart';
 import 'package:me_bored/cubits/category_cubit.dart';
 import 'package:me_bored/services/boring-api.service.dart';
 import 'package:me_bored/services/todolist.service.dart';
+import 'package:swipe/swipe.dart';
 
 import '../models/activity.model.dart';
 import '../models/todo.model.dart';
@@ -102,61 +103,62 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                                 Text(activity.title ?? "no title"),
                                 const SizedBox(width: 10),
-                                Flexible(
-                                  child: Row(
-                                    mainAxisAlignment:
+                                Swipe(
+                                  child: Flexible(
+                                    child: Row(
+                                      mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Text("Participants"),
-                                              Image(
-                                                  image: AssetImage(activity
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text("Participants"),
+                                                Image(
+                                                    image: AssetImage(activity
                                                               .participants ==
                                                           Participants.group
-                                                      ? "assets/participants-group.png"
-                                                      : "assets/participants-one.png"))
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Text("Accessibility"),
-                                              for (int i = 0;
+                                                        ? "assets/participants-group.png"
+                                                        : "assets/participants-one.png"))
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("Accessibility"),
+                                                for (int i = 0;
                                                   i <
                                                       Activity
                                                           .proportionalizeForDisplay(
                                                               activity
                                                                   .accessibility);
                                                   i++)
-                                                const Image(
+                                                  const Image(
                                                     image: AssetImage(
                                                         "assets/accessibility-highlighted.png")),
-                                              for (int i = 0;
+                                                for (int i = 0;
                                                   i <
                                                       ACCESSIBILITY_MAX -
                                                           Activity.proportionalizeForDisplay(
                                                               activity
                                                                   .accessibility);
                                                   i++)
-                                                const Image(
+                                                  const Image(
                                                     image: AssetImage(
                                                         "assets/accessibility-unhighlighted.png")),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const Text("Cost "),
-                                              for (int i = 0;
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const Text("Cost "),
+                                                for (int i = 0;
                                                   i <
                                                       Activity
                                                           .proportionalizeForDisplay(
@@ -165,7 +167,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 const Image(
                                                     image: AssetImage(
                                                         "assets/cost-highlighted.png")),
-                                              for (int i = 0;
+                                                for (int i = 0;
                                                   i <
                                                       COST_MAX -
                                                           Activity
@@ -173,25 +175,38 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   activity
                                                                       .cost);
                                                   i++)
-                                                const Image(
+                                                  const Image(
                                                     image: AssetImage(
                                                         "assets/cost-unhighlighted.png")),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Text("Type"),
-                                              Image(
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("Type"),
+                                                Image(
                                                   image: AssetImage(
                                                       "assets/icon-${activity.type.name}.png")),
-                                              //TODO not accessing cooking png properly
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                                //TODO not accessing cooking png properly
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ), // your child widget
+                                  onSwipeUp: () {
+                                    // do something when swiping up
+                                  },
+                                  onSwipeDown: () {
+                                    // do something when swiping down
+                                  },
+                                  onSwipeLeft: () {
+                                    BoringApi().getRandomActivity().then((value) => setState(() { activity = value; }));
+                                  },
+                                  onSwipeRight: () {
+                                    BoringApi().getRandomActivity().then((value) => setState(() { activity = value; }));
+                                  },
+                                )
                               ],
                             ),
                           )),
